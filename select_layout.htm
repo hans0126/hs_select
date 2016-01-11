@@ -1,0 +1,167 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>自定義下拉式選單</title>
+<link href="css/reset.css" rel="stylesheet" type="text/css">
+<link href="css/default.css" rel="stylesheet" type="text/css">
+<script src='jquery-ui-1.10.3/jquery-1.9.1.js'></script>
+<script src='hs_select.js'></script>
+<link href="hs_select.css" rel="stylesheet" type="text/css">
+<script src='jquery-ui-1.10.3/ui/jquery-ui.js'></script>
+<script src='jquery-ui-1.10.3/external/jquery.mousewheel.js'></script>
+<script src="google-code-prettify/prettify.js"></script>
+<link href="google-code-prettify/prettify.css" rel="stylesheet" type="text/css">
+
+<script>
+
+
+$(window).load(function(){	
+	$('select').hs_select({
+		 dataListHeight:100,
+		 arr_multi_select:[{"current":"#aa","target_info":[{"target":"#bb","url":"test.html"}]}],
+		 default_choice:false,
+		 data_reverse:false,
+		 openEffect:"fadeIn",
+		 li_padding:15,
+		 dataListHeight:200,
+		 attrValue:['a','b']		
+		 
+	});
+	
+	$('#select_example').hs_select();
+	
+	$('#select_example2').hs_select({
+		 li_padding:15,
+		 footer_corner:true
+	});
+	
+})
+
+</script>
+<style></style>
+</head>
+
+<body onload="prettyPrint()">
+<h1>
+	Customization Select
+</h1>
+<h2>2.Layout</h2>
+
+<h3>架構</h3>
+<img src="images/hs_select-01.png"/>
+<table class="spec_table">
+	<tr>
+		<td>參數名稱</td>
+		<td>預設</td>
+		<td>說明</td>
+	</tr>
+	<tr>
+		<td>closeDelay</td>
+		<td>200</td>
+		<td>當滑鼠離開區塊幾秒後關起來,數值毫秒</td>
+	</tr>
+	<tr>
+		<td>closeEffect</td>
+		<td>'fadeOut'</td>
+		<td>收合時的效果</td>
+	</tr>
+	<tr>
+		<td>closeEffectSpeed</td>
+		<td>'fast'</td>
+		<td>收合時的速度</td>
+	</tr>
+	<tr>
+		<td>theme</td>
+		<td>'sp_selecter'</td>
+		<td>樣式名稱</td>
+	</tr>
+	<tr>
+		<td>openEffect</td>
+		<td>'slideDown'</td>
+		<td>展開時的效果</td>
+	</tr>
+	<tr>
+		<td>openEffectSpeed</td>
+		<td>'fast'</td>
+		<td>展開時的速度</td>
+	</tr>	
+	<tr>
+		<td>default_value_text</td>
+		<td>'-select-'</td>
+		<td>預設值，什麼都沒選的時候</td>	
+	</tr>
+	<tr>
+		<td>default_choice</td>
+		<td>true</td>
+		<td>是否預先選取第一個項目</td>	
+	</tr>
+	<tr>
+		<td>dataListHeight</td>
+		<td>null</td>
+		<td>下拉選單高度限制</td>	
+	</tr>	
+	<tr>
+		<td>ul_width_tuning</td>
+		<td>0</td>
+		<td>寬度微調</td>	
+	</tr>
+	<tr>
+		<td>li_padding</td>
+		<td>0</td>
+		<td>內容選項的外距</td>	
+	</tr>
+	<tr>
+		<td>footer_corner</td>
+		<td>false</td>
+		<td>是否使用底部圓角</td>	
+	</tr>
+	<tr>
+		<td>arr_multi_select</td>
+		<td>null</td>
+		<td>關聯式下拉是選單</td>
+	</tr>
+	<tr>
+		<td>attrValue</td>
+		<td>null</td>
+		<td>傳值的名稱預設['va']</td>
+	</tr>
+	<tr>
+		<td>type</td>
+		<td>"GET"</td>
+		<td>AJAX傳值方式 POST/GET</td>
+	</tr>
+	<tr>
+		<td>dropdown_tuning</td>
+		<td>0</td>
+		<td>下拉式區域的高度位置微調</td>
+	</tr>
+	<tr>
+		<td>drag_content</td>
+		<td>null</td>
+		<td>&nbsp;</td>
+	</tr>
+	<tr>
+		<td>position_range</td>
+		<td>15</td>
+		<td>滑鼠滾輪的位移間隔</td>
+	</tr>
+	<tr>
+		<td>data_reverse</td>
+		<td>false</td>
+		<td>資料列上下翻轉</td>
+	</tr>
+	<tr>
+		<td>drag_height_fix</td>
+		<td>true</td>
+		<td>是否fix drag高度</td>
+	</tr>
+	<tr>
+		<td>drag_height</td>
+		<td>40</td>
+		<td>鎖定drag高度</td>
+	</tr>	
+</table>
+
+</body>
+</html>

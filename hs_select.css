@@ -1,0 +1,186 @@
+@charset "utf-8";
+.sp_selecter ul, .sp_selecter li{
+	margin: 0px;
+	padding: 0px;
+	list-style-type: none;	
+}
+
+.sp_selecter ,
+.sp_selecter > div.main_part {
+	height:23px;
+}
+
+.sp_selecter > div.main_part{	
+	z-index:10;	
+	background: url(style.png)
+}
+
+.sp_selecter div.left,
+.sp_selecter div.right{
+	position:absolute;
+	top:0px;	
+	width:11px;	
+}
+
+.sp_selecter {
+	position:relative;
+	z-index: 1;
+	cursor: pointer;
+	/*display:inline-block;
+	*display:inline;
+	zoom:1;*/
+	display:block;
+	float:left;
+	
+}
+.sp_selecter div.left {
+		
+	background-position: 0px -23px;
+	left:0px;
+}
+
+.sp_selecter.this div.left {
+	background-position:  0px 0px ;	
+	
+}
+
+.sp_selecter div.center {
+	line-height:22px;	
+	overflow:hidden;
+	font-size:13px;
+	color: #fff;
+	padding:0px 5px;
+  	background-position: 0px -72px;
+	background-repeat:repeat-x;
+	margin:0px 11px;
+	position:relative;
+	z-index:10;	
+	
+}
+
+.sp_selecter div.center >img {
+	margin-right:5px;	
+}
+
+.sp_selecter div.right {
+	background-position: -11px -23px ;	
+	cursor: pointer;
+	right: 0px;
+	
+	
+}
+
+.sp_selecter.this div.right {
+	background-position:  -11px 0px ;	
+}
+
+.sp_selecter > .select_listdata_area {
+	position:absolute;
+	left:0px;
+	top:0px;
+	z-index:1;
+	background:#545454;
+}
+
+.sp_selecter > .select_listdata_area > ul {
+	overflow:hidden;	
+}
+
+.sp_selecter > .select_listdata_area li {	
+	color:#FFF;
+	font-size:13px;	
+	text-align:left;
+	padding:5px 0px;
+	position:relative;
+	z-index:5;
+	
+}
+
+.sp_selecter > .select_listdata_area li > img {
+	display:inline-block;
+	*display:inline;
+	zoom:1;
+	margin-right:5px;	
+}
+
+.sp_selecter > .select_listdata_area li:hover {
+	color:#fff;	
+	background-color:#a50926;
+}
+
+/*footer*/
+.sp_selecter .select_footer{
+	position:absolute;
+	left:0px;
+	bottom:-13px;
+	height:13px;
+	padding:0px;
+	background:transparent;	
+	z-index:4;
+	
+}
+
+.sp_selecter .select_footer > div {
+	background:url(style.png);
+	height:13px;	
+}
+
+.sp_selecter .select_footer:hover{
+	background:transparent;	
+}
+
+.sp_selecter .select_footer .footer_left{
+	background-position: 0px -46px;
+	position:absolute;
+	left:0px;
+	top:0px;
+	width:11px;	
+}
+
+.sp_selecter .select_footer .footer_right{
+	position:absolute;
+	background-position:-11px -46px;
+	right:0px;
+	top:0px;
+	width:11px;
+}
+
+.sp_selecter .select_footer .footer_center{
+	background-position: 0px -59px;
+	background-repeat:repeat-x;
+	margin:0px 11px;
+}
+
+
+.sp_selecter .select_arrow{
+	background:url(style.png) -8px -98px;
+	position:absolute;
+	width:7px;
+	height:7px;
+	top:7px;
+	right:10px;
+	z-index:50;	
+	
+}
+
+.sp_selecter.this .select_arrow{
+	background-position: 0px -99px;	
+}
+
+
+/*track*/
+.sp_selecter .track{
+	position:absolute;
+	width:20px;
+	height:100%;
+	top:0px;
+	right:0px;	
+	background:#eee;
+	border-radius:6px;
+}
+
+.sp_selecter .track .drag {
+	background:#666;
+	width:20px;
+	border-radius:6px;
+}

@@ -1,0 +1,856 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<META HTTP-EQUIV="EXPIRES" CONTENT="0">
+<title>自定義下拉式選單</title>
+<link href="css/reset.css" rel="stylesheet" type="text/css">
+<link href="css/default.css" rel="stylesheet" type="text/css">
+<script src='jquery-ui-1.10.3/jquery-1.9.1.js'></script>
+<script src='hs_select.js'></script>
+<link href="hs_select.css" rel="stylesheet" type="text/css">
+<script src='jquery-ui-1.10.3/ui/jquery-ui.js'></script>
+<script src='jquery-ui-1.10.3/external/jquery.mousewheel.js'></script>
+<script src="google-code-prettify/prettify.js"></script>
+<link href="google-code-prettify/prettify.css" rel="stylesheet" type="text/css">
+<link href="example2.css" rel="stylesheet" type="text/css">
+</head>
+<script>
+	$(function(){
+		$('.spec_table a').click(function(){
+			$('body,html').stop().animate({
+				scrollTop: $($(this).attr('targ')).offset().top
+			},500);
+			
+			return false;
+		})
+		
+		
+		$('h3 > a').click(function(){
+			$('body,html').stop().animate({
+				scrollTop: $('.spec_table').offset().top
+			},500);
+			return false;
+		})
+	})
+</script>
+<body onload="prettyPrint()">
+<h1> Customization Select </h1>
+<h2>1.Hello world</h2>
+<pre class="prettyprint">
+	&lt;!-- 載入jquery 1.2.6之後之版本--&gt;
+	&lt;script src='jquery.min.js'&gt;&lt;/script&gt;
+	
+	&lt;!-- 載入select.js 與其 對應之 css--&gt;
+	&lt;script src='hs_select.js'&gt;&lt;/script&gt;
+	&lt;link href="hs_select.css" rel="stylesheet" type="text/css"&gt;
+	
+	&lt;!-- 載入jquery ui我們需要draggable 與 mousewheel的功能 --&gt;
+	&lt;script src='jquery-ui-1.10.3/ui/jquery-ui.js'&gt;&lt;/script&gt;
+	&lt;script src='jquery-ui-1.10.3/external/jquery.mousewheel.js'&gt;&lt;/script&gt;
+</pre>
+js.
+<pre class="prettyprint">
+	//使用 
+	$(window).load(function(){
+		$("#select_example").hs_select();
+	})
+	//不要使用,chrome會有問題
+	$(function(){});
+	$(document).ready();
+
+</pre>
+html.
+<pre class="prettyprint">
+	&lt;select id="select_example"&gt;
+		&lt;option >item_1&lt;/option&gt;
+		&lt;option >item_2&lt;/option&gt;
+		&lt;option >item_3&lt;/option&gt;
+	&lt;/select&gt;
+</pre>
+<h3>執行結果</h3>
+<table class="example_table">
+	<tr>
+		<td><select id="select_example">
+				<option >item_1</option>
+				<option >item_2</option>
+				<option >item_3</option>
+			</select></td>
+		<td><input type="button" value='執行範例' onclick="goSselectExample(this)"/></td>
+	</tr>
+</table>
+<script>
+	function goSselectExample(current_obj){	
+		$(current_obj).attr('disabled',true);
+		$('<div>效果不理想，需要進行微調</div>').insertAfter(current_obj);
+		$(current_obj).remove();
+		$('#select_example').hs_select();
+	}		
+</script> 
+js.
+<pre class="prettyprint">
+	//使用 
+	$(window).load(function(){
+		$("#select_example").hs_select({
+			 li_padding:15	//設定li的內距，設定一個數值，兩邊會各加15px
+			 ,footer_corner:true //增加下圓角區塊
+		});
+	})	
+</pre>
+html.
+<pre class="prettyprint">
+ 	&lt;!--在元素中加上寬度的參數，再執行前，js會先抓取原始元素的寬度 --&gt;
+	&lt;select id="select_example" style="width:200px" &gt;
+		&lt;option >item_1&lt;/option&gt;
+		&lt;option >item_2&lt;/option&gt;
+		&lt;option >item_3&lt;/option&gt;
+	&lt;/select&gt;
+</pre>
+<h3>執行結果</h3>
+<table class="example_table">
+	<tr>
+		<td><select id="select_example2" style="width:200px">
+				<option value="1" bb="2">item_1</option>
+				<option value="3" bb="4">item_2</option>
+				<option value="5" bb="6">item_3</option>
+			</select></td>
+		<td><input type="button" value='執行範例' onclick="goSselectExample2(this)"/></td>
+	</tr>
+</table>
+<script>
+	function goSselectExample2(current_obj){	
+		$(current_obj).remove();		
+		$('#select_example2').hs_select({
+			 li_padding:15,
+			 footer_corner:true	 
+		});
+	}		
+</script>
+<div class="break_line"></div>
+<h2>2.Layout</h2>
+<div>.sp_selecter 會隨著theme 而不同，預設為sp_selecter</div>
+<img src="images/hs_select-01.png"/>
+<div class="break_line"></div>
+<h2>3.attribute</h2>
+<table class="spec_table">
+	<tr>
+		<td>參數名稱</td>
+		<td>預設</td>
+		<td>說明</td>
+	</tr>
+	<tr>
+		<td colspan="3" class="title_row">資料處理</td>
+	</tr>
+	<tr>
+		<td><a href="#" targ="#attrValue">attrValue</a></td>
+		<td>['va']</td>
+		<td>傳值的名稱預設 [陣列]</td>
+	</tr>
+	<tr>
+		<td><a href="#" targ="#arr_multi_select">arr_multi_select</a></td>
+		<td>null</td>
+		<td>關聯式下拉是選單 [陣列]</td>
+	</tr>
+	<tr>
+		<td>type</td>
+		<td>"GET"</td>
+		<td>AJAX傳值方式 POST/GET</td>
+	</tr>
+	<tr>
+		<td colspan="3" class="title_row">事件</td>
+	</tr>	
+	<tr>
+		<td><a href="#" targ="#clickEvent">clickEvent</a></td>
+		<td>null</td>
+		<td>選中時的事件處理</td>
+	</tr>
+	<tr>
+		<td colspan="3" class="title_row">效果</td>
+	</tr>	
+	<tr>
+		<td>closeDelay</td>
+		<td>200</td>
+		<td>當滑鼠離開區塊幾秒後關起來,數值毫秒</td>
+	</tr>
+	<tr>
+		<td><a href="#" targ="#effect">closeEffect</a></td>
+		<td>'fadeOut'</td>
+		<td>收合時的效果 'slideUp' | 'fadeOut' </td>
+	</tr>
+	<tr>
+		<td>closeEffectSpeed</td>
+		<td>'fast'</td>
+		<td>收合時的速度 </td>
+	</tr>
+	<tr>
+		<td><a href="#" targ="#effect">openEffect</a></td>
+		<td>'slideDown'</td>
+		<td>展開時的效果 'slideDown' | 'fadeIn' </td>
+	</tr>
+	<tr>
+		<td>openEffectSpeed</td>
+		<td>'fast'</td>
+		<td>展開時的速度</td>
+	</tr>
+	<tr>
+		<td colspan="3" class="title_row">外觀</td>
+	</tr>
+	<tr>
+		<td><a href="#" targ="#theme">theme</a></td>
+		<td>'sp_selecter'</td>
+		<td>樣式名稱</td>
+	</tr>
+	<tr>
+		<td><a href="#" targ="#scroll">dataListHeight</a></td>
+		<td>null</td>
+		<td>下拉選單高度限制</td>
+	</tr>
+	<tr>
+		<td><a href="#" targ="#scroll">drag_height_fix</a></td>
+		<td>true</td>
+		<td>是否fix drag高度</td>
+	</tr>
+	<tr>
+		<td><a href="#" targ="#scroll">drag_height</a></td>
+		<td>40</td>
+		<td>鎖定drag高度</td>
+	</tr>	
+	<tr>
+		<td><a href="#" targ="#default_value">default_value_text</a></td>
+		<td>'-select-'</td>
+		<td>初始值，當什麼都還沒選的時候</td>
+	</tr>
+	<tr>
+		<td><a href="#" targ="#default_value">default_choice</a></td>
+		<td>true</td>
+		<td>是否預先選取第一個項目</td>
+	</tr>
+	<tr>
+		<td>dropdown_tuning</td>
+		<td>0</td>
+		<td>下拉式區域的高度位置微調</td>
+	</tr>
+	<tr>
+		<td>drag_content</td>
+		<td>null</td>
+		<td>&nbsp;</td>
+	</tr>
+	<tr>
+		<td><a href="#" targ="#reverse">data_reverse</a></td>
+		<td>false</td>
+		<td>資料列上下翻轉</td>
+	</tr>
+	
+	<tr>
+		<td>li_padding</td>
+		<td>0</td>
+		<td>內容選項的外距</td>
+	</tr>
+	<tr>
+		<td>ul_width_tuning</td>
+		<td>0</td>
+		<td>下拉式區塊寬度微調</td>
+	</tr>
+	<tr>
+		<td><a href="#" targ="#corner">footer_corner</a></td>
+		<td>false</td>
+		<td>是否使用底部圓角</td>
+	</tr>
+
+	<tr>
+		<td>position_range</td>
+		<td>15</td>
+		<td>滑鼠滾輪的位移間隔</td>
+	</tr>	
+	<tr>
+		<td><a href="#" targ="#icon">Icon</a></td>
+		<td>Null</td>
+		<td>Icon圖示</td>
+	</tr>
+</table>
+<ul id="attribute_list">
+	<li>
+		<h3 id="attrValue">attrValue <a href="#attrValue">Top</a></h3>
+		如果此參數未設定，則預設參數名稱為va,<br/>
+		程式轉換過程中，所定義的第一個值將來自於option的value<br/>
+		js.
+		<pre class="prettyprint">	
+			$("#select_example").hs_select({
+				attrValue:['apple','orange','lemon'] //可代複數的自定義參數並於傳值階段傳遞出去
+			});	
+		</pre>
+		html.
+		<pre class="prettyprint">			
+			&lt;select id="select_example" style="width:200px" &gt;
+				&lt;option value="1" orange="2" lemon="3">item_1&lt;/option&gt;
+				&lt;option value="4" orange="5" lemon="6">item_2&lt;/option&gt;
+				&lt;option value="7" orange="8" lemon="9">item_3&lt;/option&gt;
+			&lt;/select&gt;
+		</pre>
+		<table class="example_table">
+			<tr>
+				<td><select id="attrvalue_example" style="width:200px" >
+						<option value="1" orange="2" lemon="3">item_1</option>
+						<option value="4" orange="5" lemon="6">item_2</option>
+						<option value="7" orange="8" lemon="9">item_3</option>
+					</select></td>
+				<td><input type="button" value='執行範例' onclick="goAttrValue(this)"/></td>
+			</tr>
+		</table>
+		<script>
+			function goAttrValue(current_obj){	
+			
+				
+				$('<div>可用chrome或是firefox觀察程式碼</div>').insertAfter(current_obj);
+				$(current_obj).remove();
+				$("#attrvalue_example").hs_select({
+					attrValue:['apple','orange','lemon'],
+					 li_padding:15,
+					 footer_corner:true
+				});	
+			}		
+		</script>
+	</li>
+	<li>
+		<h3 id="arr_multi_select">arr_multi_select <a href="#">Top</a></h3>
+		連動式下拉式選單，可以一對一或是一對多的Ajax連動
+		<div>js</div>
+		<pre class="prettyprint">
+			//要使用連動時，不要使用ID呼叫jq，用class	
+			//一對多 當元件A觸發時，元件B與元件C可同時連動
+			$(".some_select").hs_select({
+				 arr_multi_select:[{"current":"元件A","target_info":[{"target":"元件B","url":"目標網址一"},{"target":"元件C","url":"目標網址二"}]}]
+			});	
+			
+			//一對一 當元件A觸發時，元件B連動，可定義多階層連動
+			$(".some_select").hs_select({
+				 arr_multi_select:[{"current":"元件A","target_info":[{"target":"元件B","url":"目標網址"}]},{"current":"元件B","target_info":[{"target":"元件C","url":"目標網址"}]
+			});	
+	</pre>
+		Json.
+		<pre class="prettyprint">
+		&lt;!-- 		
+		{回傳的項目名稱:值,"value":{值1:"",值2:"",值3:""}
+		須配合attrValue宣告值的名稱		
+		 --&gt;
+		[{"title":"return item 1","value":{"apple":"1","orange":"2","lemon":"3"}}
+		,{"title":"return item 2","value":{"apple":"4","orange":"5","lemon":"6"}}
+		,{"title":"return item 3","value":{"apple":"7","orange":"8","lemon":"9"}}
+		,{"title":"return item 4","value":{"apple":"10","orange":"11","lemon":"12"}}
+		,{"title":"return item 5","value":{"apple":"13","orange":"14","lemon":"15"}}]
+
+	</pre>
+		<table class="example_table">
+			<tr>
+				<td><select class="multi_select" id="multi_a" style="width:200px" >
+						<option value="1" orange="2" lemon="3">item_1</option>
+						<option value="4" orange="5" lemon="6">item_2</option>
+						<option value="7" orange="8" lemon="9">item_3</option>
+					</select></td>
+				<td><select class="multi_select" id="multi_b" style="width:200px" >
+					</select></td>
+				<td><input type="button" value='執行範例' onclick="goMultiSelect(this)"/></td>
+			</tr>
+		</table>
+		<script>
+			function goMultiSelect(current_obj){				
+				$('<div>可用chrome或是firefox觀察程式碼</div>').insertAfter(current_obj);
+				$(current_obj).remove();
+				$(".multi_select").hs_select({
+					attrValue:['apple','orange','lemon'],
+					 li_padding:15,
+					 footer_corner:true,
+					 arr_multi_select:[{"current":"#multi_a","target_info":[{"target":"#multi_b","url":"test.html"}]}]
+				});	
+			}		
+	</script>
+	</li>
+	<li>
+		<h3 id="clickEvent">clickEvent <a href="#">Top</a></h3>
+		項目選取事件
+		<div>js.</div>
+		<pre class="prettyprint">
+						
+			//clickEvent:function(所選取的值,當下select的物件)
+			//若是attrValue無設定時，	預設va為一組值，若是有設定單組以上則會回傳object，使用方是如以下範例	
+			
+			$("#clickEventExample").hs_select({
+					attrValue:['apple','orange','lemon'],
+					li_padding:15,
+					footer_corner:true,
+					clickEvent:function(va,thisObj){						
+						var out_text='所選的值&lt;br/&gt;';						
+						for (var k in va) {							
+							out_text+=k+":"+va[k]+"&lt;br/&gt;";							
+						}		
+						out_text+="ID="+thisObj.attr("id");
+						$('#clickEventExampleText').html(out_text);											
+					}
+			});			
+		</pre>
+		<div>html.</div>
+		<pre class="prettyprint">			
+			&lt;select id="select_example" style="width:200px" &gt;
+				&lt;option value="1" orange="2" lemon="3">item_1&lt;/option&gt;
+				&lt;option value="4" orange="5" lemon="6">item_2&lt;/option&gt;
+				&lt;option value="7" orange="8" lemon="9">item_3&lt;/option&gt;
+			&lt;/select&gt;
+		</pre>
+		<table class="example_table">
+			<tr>
+				<td><select id="clickEventExample" style="width:200px" >
+						<option value="1" orange="2" lemon="3">item_1</option>
+						<option value="4" orange="5" lemon="6">item_2</option>
+						<option value="7" orange="8" lemon="9">item_3</option>
+					</select></td>
+				<td id="clickEventExampleText"></td>
+				<td><input type="button" value='執行範例' onclick="clickEventExample(this)"/></td>
+			</tr>
+		</table>
+		<script>
+			function clickEventExample(current_obj){				
+				$(current_obj).remove();
+				$("#clickEventExample").hs_select({
+					attrValue:['apple','orange','lemon'],
+					li_padding:15,
+					footer_corner:true,
+					clickEvent:function(va,thisObj){						
+					
+						var out_text='所選的值<br/>';						
+						for (var k in va) {							
+							out_text+=k+":"+va[k]+"<br/>";							
+						}		
+						out_text+="ID="+thisObj.attr("id");
+						$('#clickEventExampleText').html(out_text);	
+																
+					}
+				});	
+			}		
+		</script>
+	</li>
+	<li>
+		<h3 id="effect">closeEffect & openEffect <a href="#">Top</a></h3>
+		開合效果
+		<div>js.</div>
+		<pre class="prettyprint">		
+			$("#openEffectExample2").hs_select({					
+				li_padding:15,
+				footer_corner:true,
+				openEffect:'slideDown',
+				closeEffect:'slideUp'					
+			});	
+			$("#openEffectExample3").hs_select({					
+				li_padding:15,
+				footer_corner:true,
+				openEffect:'fadeIn',
+				closeEffect:'fadeOut'					
+			});	
+		</pre>
+		<table class="example_table">
+			<tr>
+				<td>slide</td>
+				<td>fade</td>
+				<td>&nbsp;</td>
+			</tr>
+			<tr>
+				<td><select id="openEffectExample2" style="width:200px" >
+						<option value="1" >item_1</option>
+						<option value="4" >item_2</option>
+						<option value="7" >item_3</option>
+					</select></td>
+				<td><select id="openEffectExample3" style="width:200px" >
+						<option value="1" >item_1</option>
+						<option value="4" >item_2</option>
+						<option value="7" >item_3</option>
+					</select></td>
+				<td><input type="button" value='執行範例' onclick="openExample(this)"/></td>
+			</tr>
+		</table>
+		<script>
+			function openExample(current_obj){				
+				$(current_obj).remove();
+				
+					$("#openEffectExample2").hs_select({					
+					li_padding:15,
+					footer_corner:true,
+					openEffect:'slideDown',
+					closeEffect:'slideUp'					
+				});	
+					$("#openEffectExample3").hs_select({					
+					li_padding:15,
+					footer_corner:true,
+					openEffect:'fadeIn',
+					closeEffect:'fadeOut'					
+				});	
+			}		
+		</script>
+	</li>
+	<li>
+		<h3 id="scroll">dataListHeight &amp; drag_height_fix &amp; drag_height <a href="#">Top</a></h3>
+		卷軸
+		<div>js.</div>
+		<pre class="prettyprint">
+			//dataListHeight 賦值時，若檔案列表超過設定高度，則會出現scroll bar				
+			$("#scrollExample").hs_select({					
+				li_padding:15,
+				footer_corner:true,
+				dataListHeight:150,
+				drag_height:50	//控制drag 高度								
+			});
+				
+			$("#scrollExample2").hs_select({					
+				li_padding:15,
+				footer_corner:true,
+				dataListHeight:150,
+				drag_height_fix:false //是否鎖定drag高度						
+			});	
+		</pre>
+		<pre class="prettyprint">
+			&lt;!-- 以下是scroller的html碼，可至css定義樣式 --&gt;
+			&lt;div class=&quot;track&quot;&gt;
+					&lt;div class=&quot;drag ui-draggable&quot;&gt;&lt;/div&gt;
+			&lt;/div&gt;			
+		</pre>
+		<table class="example_table">
+			<tr>
+				<td>不論資料筆數多少drag會鎖住高度</td>
+				<td>drag高度會隨著資料筆數增減而有所變化</td>
+				<td>&nbsp;</td>
+			</tr>
+			<tr>
+				<td><select id="scrollExample" style="width:200px" >
+						<option value="1" >item_1</option>
+						<option value="2" >item_2</option>
+						<option value="3" >item_3</option>
+						<option value="4" >item_4</option>
+						<option value="5" >item_5</option>
+						<option value="6" >item_6</option>
+						<option value="1" >item_1</option>
+						<option value="2" >item_2</option>
+						<option value="3" >item_3</option>
+						<option value="4" >item_4</option>
+						<option value="5" >item_5</option>
+						<option value="6" >item_6</option>
+						<option value="1" >item_1</option>
+						<option value="2" >item_2</option>
+						<option value="3" >item_3</option>
+						<option value="4" >item_4</option>
+						<option value="5" >item_5</option>
+						<option value="6" >item_6</option>
+					</select></td>
+				<td><select id="scrollExample2" style="width:200px" >
+						<option value="1" >item_1</option>
+						<option value="2" >item_2</option>
+						<option value="3" >item_3</option>
+						<option value="4" >item_4</option>
+						<option value="5" >item_5</option>
+						<option value="6" >item_6</option>
+						<option value="7" >item_7</option>
+						<option value="8" >item_8</option>
+						<option value="3" >item_3</option>
+						<option value="4" >item_4</option>
+						<option value="5" >item_5</option>
+						<option value="1" >item_1</option>
+						<option value="2" >item_2</option>
+						<option value="3" >item_3</option>
+						<option value="4" >item_4</option>
+						<option value="5" >item_5</option>
+						<option value="6" >item_6</option>
+						<option value="7" >item_7</option>
+						<option value="8" >item_8</option>
+						<option value="3" >item_3</option>
+						<option value="4" >item_4</option>
+						<option value="5" >item_5</option>
+					</select></td>
+				<td><input type="button" value='執行範例' onclick="scrollExample(this)"/></td>
+			</tr>
+		</table>
+		<script>
+			function scrollExample(current_obj){				
+				$(current_obj).remove();
+				
+				$("#scrollExample").hs_select({					
+					li_padding:15,
+					footer_corner:true,
+					dataListHeight:150,
+					drag_height:50								
+				});
+				
+				$("#scrollExample2").hs_select({					
+					li_padding:15,
+					footer_corner:true,
+					dataListHeight:150,
+					drag_height_fix:false								
+				});			
+			}		
+		</script>
+	</li>
+	<li>
+		<h3 id="reverse">data_reverse <a href="#">Top</a></h3>
+		下拉式選單，上下翻轉
+		<div>js.</div>
+		<pre class="prettyprint">
+			$("#dataReverseExample").hs_select({					
+				li_padding:15,
+				footer_corner:true,
+				data_reverse:true,
+				openEffect:"fadeIn" //當data_reverse開啟時，請將openEffect改成 fadeIn					
+			});				
+		</pre>
+		<table class="example_table">
+			<tr>
+				<td><select id="dataReverseExample" style="width:200px" >
+						<option value="1" >item_1</option>
+						<option value="2" >item_2</option>
+						<option value="3" >item_3</option>
+						<option value="4" >item_4</option>
+						<option value="5" >item_5</option>
+						<option value="6" >item_6</option>
+					</select></td>
+				<td><input type="button" value='執行範例' onclick="dataReverseExample(this)"/></td>
+			</tr>
+		</table>
+		<script>
+			function dataReverseExample(current_obj){				
+				$(current_obj).remove();
+				
+				$("#dataReverseExample").hs_select({					
+					li_padding:15,					
+					data_reverse:true,
+					openEffect:"fadeIn" //當data_reverse開啟時，請將openEffect改成 fadeIn					
+				});				
+			
+			}		
+		</script>
+	</li>
+	<li>
+		<h3 id="theme">theme <a href="#">Top</a></h3>
+		在同一個頁面，使用不同的樣式
+		<div>js.</div>
+		<pre class="prettyprint">
+			$("#themeExample").hs_select({					
+				li_padding:15,
+				footer_corner:true						
+			});	
+			
+			$("#themeExample2").hs_select({					
+				li_padding:15,
+				theme:"example2",
+				ul_width_tuning:-2,//因為兩邊多加了1px外邊框線條，因此整體寬度減少2px
+				footer_corner:true					
+			});					
+		</pre>
+		<div>html.</div>
+		<pre class="prettyprint">
+			&lt;!-- 載入另一組樣式 --&gt;
+			&lt;link href=&quot;example2.css&quot; rel=&quot;stylesheet&quot; type=&quot;text/css&quot;&gt;
+		</pre>
+		<table class="example_table">
+			<tr>
+				<td><select id="themeExample" style="width:200px" >
+						<option value="1" >item_1</option>
+						<option value="2" >item_2</option>
+						<option value="3" >item_3</option>
+						<option value="4" >item_4</option>
+						<option value="5" >item_5</option>
+						<option value="6" >item_6</option>
+					</select></td>
+				<td><select id="themeExample2" style="width:200px" >
+						<option value="1" >item_1</option>
+						<option value="2" >item_2</option>
+						<option value="3" >item_3</option>
+						<option value="4" >item_4</option>
+						<option value="5" >item_5</option>
+						<option value="6" >item_6</option>
+					</select></td>
+				<td><input type="button" value='執行範例' onclick="themeExample(this)"/></td>
+			</tr>
+		</table>
+		<script>
+			function themeExample(current_obj){				
+				$(current_obj).remove();
+				
+				$("#themeExample").hs_select({					
+					li_padding:15,
+					footer_corner:true						
+				});	
+				
+				$("#themeExample2").hs_select({					
+					li_padding:15,
+					theme:"example2",
+					ul_width_tuning:-2,//因為兩邊多加了1px外邊框線條，因此整體寬度減少2px
+					footer_corner:true					
+				});		
+			}		
+		</script>
+	</li>
+	<li>
+		<h3 id="default_value">default_value_text &amp; default_choice <a href="#">Top</a></h3>
+		當未選擇時的預設值
+		<div>js.</div>
+		<pre class="prettyprint">
+			/*當default_choice 關閉時，會帶入預設的-select- */
+			$("#defaultChoice").hs_select({					
+				li_padding:15,
+				footer_corner:true,
+				default_choice:false//不預先選擇某個項目而是用文自替代				
+			});	
+			/*可定義需要顯示的字*/
+			$("#defaultChoice2").hs_select({					
+				li_padding:15,
+				footer_corner:true,
+				default_choice:false,//不預先選擇某個項目而是用文自替代
+				default_value_text:'-Please Choice-'				
+			});	
+			/*亦可定義需要顯示的字於select 物件內，如下面範例*/
+			$("#defaultChoice3").hs_select({					
+				li_padding:15,
+				footer_corner:true,
+				default_choice:false,//不預先選擇某個項目而是用文自替代
+					
+			});					
+		</pre>
+		<div>html.</div>
+		<pre class="prettyprint">
+			&lt;select id=&quot;defaultChoice3&quot; style=&quot;width:200px&quot; default_value=&quot;-Choice Me!!-&quot;&gt;<br>				&lt;option value=&quot;1&quot; &gt;item_1&lt;/option&gt;<br>				&lt;option value=&quot;2&quot; &gt;item_2&lt;/option&gt;<br>				&lt;option value=&quot;3&quot; &gt;item_3&lt;/option&gt;<br>				&lt;option value=&quot;4&quot; &gt;item_4&lt;/option&gt;<br>				&lt;option value=&quot;5&quot; &gt;item_5&lt;/option&gt;<br>				&lt;option value=&quot;6&quot; &gt;item_6&lt;/option&gt;								<br>			&lt;/select&gt;
+		</pre>
+		<table class="example_table">
+			<tr>
+				<td><select id="defaultChoice" style="width:200px" >
+						<option value="1" >item_1</option>
+						<option value="2" >item_2</option>
+						<option value="3" >item_3</option>
+						<option value="4" >item_4</option>
+						<option value="5" >item_5</option>
+						<option value="6" >item_6</option>
+					</select></td>
+				<td><select id="defaultChoice2" style="width:200px" >
+						<option value="1" >item_1</option>
+						<option value="2" >item_2</option>
+						<option value="3" >item_3</option>
+						<option value="4" >item_4</option>
+						<option value="5" >item_5</option>
+						<option value="6" >item_6</option>
+					</select></td>
+				<td><select id="defaultChoice3" style="width:200px" default_value="-Choice Me!!-">
+						<option value="1" >item_1</option>
+						<option value="2" >item_2</option>
+						<option value="3" >item_3</option>
+						<option value="4" >item_4</option>
+						<option value="5" >item_5</option>
+						<option value="6" >item_6</option>
+					</select></td>
+				<td><input type="button" value='執行範例' onclick="defaultChoice(this)"/></td>
+			</tr>
+		</table>
+		<script>
+			function defaultChoice(current_obj){				
+				$(current_obj).remove();
+				
+				$("#defaultChoice").hs_select({					
+					li_padding:15,
+					footer_corner:true,
+					default_choice:false//不預先選擇某個項目而是用文自替代				
+				});	
+				
+				$("#defaultChoice2").hs_select({					
+					li_padding:15,
+					footer_corner:true,
+					default_choice:false,//不預先選擇某個項目而是用文自替代
+					default_value_text:'-Please Choice-'				
+				});	
+				
+				$("#defaultChoice3").hs_select({					
+					li_padding:15,
+					footer_corner:true,
+					default_choice:false,//不預先選擇某個項目而是用文自替代
+						
+				});				
+					
+			}		
+		</script>
+	</li>
+	<li>
+		<h3 id="icon">Icon <a href="#">Top</a></h3>
+		圖片Icon
+		<div>html.</div>
+		<pre class="prettyprint">
+			&lt;!-- 再option裡新增icon_url的屬性--&gt;
+			&lt;select style='width:200px' id='iconExample'&gt;
+				&lt;option icon_url=&quot;tw.png&quot; &gt;Taiwan&lt;/option&gt;
+				&lt;option icon_url=&quot;jp.png&quot; &gt;Japan&lt;/option&gt;
+			&lt;/select&gt;
+		</pre>
+		<table class="example_table">
+			<tr>
+				<td><select style='width:200px' id='iconExample'>
+						<option icon_url="tw.png" >Taiwan</option>
+						<option icon_url="jp.png" >Japan</option>
+					</select></td>
+				<td><input type="button" value='執行範例' onclick="iconExample(this)"/></td>
+			</tr>
+		</table>
+		<script>
+			function iconExample(current_obj){				
+				$(current_obj).remove();
+				
+				$("#iconExample").hs_select({					
+					li_padding:15,
+					footer_corner:true,
+					default_choice:false//不預先選擇某個項目而是用文自替代				
+				});		
+			}		
+		</script>
+	</li>
+	<li>
+		<h3 id="corner">footer_corner <a href="#">Top</a></h3>
+		下圓角區塊
+		<div>html.</div>
+		<pre class="prettyprint">
+			&lt;!-- 圓角樣式由CSS設定--&gt;
+			&lt;div class=&quot;select_footer&quot;&gt;
+				&lt;div class=&quot;footer_left&quot;&gt;&lt;/div&gt;
+				&lt;div class=&quot;footer_center&quot;&gt;&lt;/div&gt;
+				&lt;div class=&quot;footer_right&quot;&gt;&lt;/div&gt;
+			&lt;/div&gt;
+		</pre>
+		<table class="example_table">
+			<tr>
+				<td> 無圓角區塊 </td>
+				<td> 有圓角區塊 </td>
+				<td>&nbsp;</td>
+			</tr>
+			<tr>
+				<td><select style='width:200px' id='cornerExample'>
+						<option icon_url="tw.png" >Taiwan</option>
+						<option icon_url="jp.png" >Japan</option>
+					</select></td>
+				<td><select style='width:200px' id='cornerExample2'>
+						<option icon_url="tw.png" >Taiwan</option>
+						<option icon_url="jp.png" >Japan</option>
+					</select></td>
+				<td><input type="button" value='執行範例' onclick="cornerExample(this)"/></td>
+			</tr>
+		</table>
+		<script>
+			function cornerExample(current_obj){				
+				$(current_obj).remove();
+				
+				$("#cornerExample").hs_select({					
+					li_padding:15,
+					footer_corner:false									
+				});
+				$("#cornerExample2").hs_select({					
+					li_padding:15,
+					footer_corner:true									
+				});		
+			}		
+		</script>
+	</li>
+</ul>
+
+<div id="footer">
+	create by Hans
+</div>
+</body>
+</html>

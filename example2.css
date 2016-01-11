@@ -1,0 +1,160 @@
+@charset "utf-8";
+.example2 ul, .example2 li{
+	margin: 0px;
+	padding: 0px;
+	list-style-type: none;	
+}
+
+.example2 ,
+.example2 > div.main_part {
+	height:21px;
+}
+
+.example2 > div.main_part {	
+	z-index:10;	
+	background: url(example2.png)
+}
+
+.example2 div.left,
+.example2 div.right{
+	position:absolute;
+	top:0px;	
+	width:11px;	
+}
+
+.example2 {
+	position:relative;
+	z-index: 1;
+	cursor: pointer;
+	display:inline-block;
+	*display:inline;
+	zoom:1;
+	
+}
+.example2 div.left {
+		
+	background-position: 0px -21px;
+	left:0px;
+}
+
+.example2.this div.left {
+	background-position:  0px 0px ;	
+	
+}
+
+.example2 div.center {	
+
+	line-height:21px;	
+	overflow:hidden;
+	font-size:13px;
+	color: #747474;
+	padding:0px 5px;
+  	background-position: 0px -68px;
+	background-repeat:repeat-x;
+	margin:0px 11px;
+	position:relative;
+	z-index:10;	
+	text-align:left;
+	
+}
+
+.example2 div.right {
+	background-position: -11px -21px ;	
+	cursor: pointer;
+	right: 0px;
+	
+	
+}
+
+.example2.this div.right {
+	background-position:  -11px 0px ;	
+}
+
+.example2 > .select_listdata_area {
+	position:absolute;
+	left:0px;
+	top:0px;
+	/*border:solid 1px #DDDDDD;
+	border-top:0px;	*/
+	
+	border-right:1px solid #d9d9d9;	
+	border-left:1px solid #d9d9d9;	
+	
+	z-index:1;
+	background:#f6f6f6;
+}
+
+.example2 > .select_listdata_area li {	
+	color:#747474;
+	font-size:13px;	
+	text-align:left;
+	padding:5px 0px;
+	position:relative;
+	z-index:5;
+	
+}
+
+.example2 > .select_listdata_area li:hover {
+	color:#fff;	
+	background-color:#a50926;
+}
+
+/*footer*/
+.example2 .select_footer{
+	position:absolute;
+	left:0px;
+	bottom:-8px;
+	height:13px;
+	padding:0px;
+	background:transparent;	
+	z-index:4;
+	
+}
+
+.example2 .select_footer:hover{
+		background:transparent;	
+}
+
+.example2 .select_footer > div {
+	background:url(example2.png);
+	height:13px;	
+}
+
+.example2 .select_footer .footer_left{
+	background-position: 0px -42px;
+	position:absolute;
+	left:-1px;
+	top:0px;
+	width:11px;	
+}
+
+.example2 .select_footer .footer_right{
+	position:absolute;
+	background-position:-11px -42px;
+	right:-1px;
+	top:0px;
+	width:11px;
+}
+
+.example2 .select_footer .footer_center{
+	background-position: 0px -55px;
+	background-repeat:repeat-x;
+	margin:0px 10px;
+	
+}
+
+
+.example2 .select_arrow{
+	background:url(example2.png) -8px -91px;
+	position:absolute;
+	width:7px;
+	height:7px;
+	top:7px;
+	right:10px;
+	z-index:50;	
+	
+}
+
+.example2.this .select_arrow{
+	background-position: 0px -92px;	
+}
